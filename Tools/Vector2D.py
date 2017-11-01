@@ -14,6 +14,10 @@ class Vector2D(object):
         self.x *= value/length
         self.y *= value/length
 
+    @staticmethod
+    def from_to(start,end):
+        return Vector2D(end[0]-start[0],end[1]-start[1])
+
     def normalize(self):
         length = self.get_length()
         if length != 0:
