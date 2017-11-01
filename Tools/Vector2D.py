@@ -21,6 +21,6 @@ class Vector2D(object):
     def normalize(self):
         length = self.get_length()
         if length != 0:
-            return self/length
+            return Vector2D(self.x/length, self.y/length)
         return Vector2D(self)
 

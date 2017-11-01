@@ -1,4 +1,4 @@
-from Tools import Vector2D
+from Tools.Vector2D import Vector2D
 import pygame
 
 
@@ -12,5 +12,10 @@ class SimpleObject(object):
 
     def move_to(self, destination):
         direction = Vector2D.from_to(self.position, destination).normalize()
-        self.position[0] += direction[0] * self.speed
-        self.position[1] += direction[1] * self.speed
+        x = self.position[0]
+        if 0 < x < self.world.width:
+            x = self.position[0] + direction.x * self.speed
+        y = self.position[1]
+        if 0 < y < self.world.height:
+            y = self.position[1] + direction.y * self.speed
+        self.position = (x, y)
