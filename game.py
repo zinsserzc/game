@@ -9,7 +9,7 @@ background_image_name = "images/background.jpg"
 object_image = "images/fugu.png"
 
 world = TestWorld(background_image_name)
-role = SimpleObject(object_image, (1, 1))
+role = SimpleObject(object_image, (SCREEN_SIZE[0] / 2, SCREEN_SIZE[1] / 2))
 world.add_object(role)
 world.set_main_object(role)
 
@@ -23,7 +23,9 @@ world_surface = world.world_image.convert()
 role_surface = role.role_image.convert_alpha()
 
 screen.blit(world_surface, world.position)
-screen.blit(role_surface, role.position)
+screen.blit(role_surface, (SCREEN_SIZE[0]/2 - role.width/2, SCREEN_SIZE[1]/2 - role.height/2))
+
+screen_postion = (0, 0)
 
 while True:
 
@@ -42,9 +44,13 @@ while True:
     if pressed_mouse[0] == 1:
         role.move_to(pygame.mouse.get_pos())
         world.move_to((-pygame.mouse.get_pos()[0], -pygame.mouse.get_pos()[1]))
+        print(role.position)
+        print(world.position)
+
+    screen_postion = (SCREEN_SIZE[0] / 2 - role.position[0], SCREEN_SIZE[1] / 2 - role.position[1])
 
     screen.fill((255, 255, 255))
-    screen.blit(world_surface, world.position)
-    screen.blit(role_surface, (SCREEN_SIZE[0]/2 - role.width/2, SCREEN_SIZE[1]/2 - role.height/2))
+    screen.blit(world_surface, screen_postion)
+    screen.blit(role_surface, (SCREEN_SIZE[0] / 2 - role.width / 2, SCREEN_SIZE[1] / 2 - role.height / 2))
 
     pygame.display.update()
